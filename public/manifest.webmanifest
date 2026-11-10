@@ -1,0 +1,59 @@
+{
+  "name": "VA Contracting",
+  "short_name": "VA Contracting",
+  "description": "Kitchen, washroom, interlock, deck and commercial renovations across the GTA, plus VA Contracting employee tools.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "browser"
+  ],
+  "background_color": "#e9e7e2",
+  "theme_color": "#0d2a54",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/pwa-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Employee Portal",
+      "short_name": "Employee",
+      "description": "Open the VA Contracting employee tools.",
+      "url": "/employee",
+      "icons": [
+        {
+          "src": "/pwa-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Request an estimate",
+      "short_name": "Estimate",
+      "description": "Open the estimate request form.",
+      "url": "/#quote",
+      "icons": [
+        {
+          "src": "/pwa-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

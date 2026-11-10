@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /employee
+Disallow: /api/
+
+Sitemap: https://va-contracting.pages.dev/sitemap.xml

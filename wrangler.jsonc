@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "va-contracting",
+  "pages_build_output_dir": "dist-pages",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "va-contracting-db",
+      "database_id": "d9fa0add-3288-400b-b698-4281b7c713e5",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "RECEIPTS",
+      "bucket_name": "va-contracting-receipts"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
