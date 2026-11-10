@@ -33,11 +33,15 @@ jobs:
         run: node --test tests/rendered-html.test.mjs
 
       - name: Stage Pages output
-        run: node export/stage-pages.mjs dist-pages
+        # The vinext build leaves a Workers deploy redirect in .wrangler/deploy;
+        # remove it so wrangler uses wrangler.jsonc (Pages) instead.
+        run: |
+          node export/stage-pages.mjs dist-pages
+          rm -rf .wrangler/deploy
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist-pages --project-name va-contracting --branch main --commit-hash ${{ github.sha }} --commit-message "${{ github.event.head_commit.message || 'Manual deploy' }}"
+          command: pages deploy dist-pages --project-name va-contracting --branch main --commit-hash ${{ github.sha }} --commit-dirty=true
