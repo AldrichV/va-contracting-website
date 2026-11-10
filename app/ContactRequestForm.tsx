@@ -120,9 +120,11 @@ export function ContactRequestForm() {
       // Server unreachable: fall through to the email relay below.
     }
 
-    // If the server could not email VA itself, relay the request to VA's inbox from the browser.
+    // If the server could not email VA itself, relay the request to VA's inbox
+    // from the browser. When the request is already saved, don't make the
+    // visitor wait on the relay (it can take 30+ seconds); send it in the background.
     if (!notified) {
-      notified = await relayByEmail({
+      const relay = relayByEmail({
         details,
         email,
         location,
@@ -133,6 +135,8 @@ export function ContactRequestForm() {
         requestId,
         saved,
       });
+      if (saved) void relay;
+      else notified = await relay;
     }
 
     if (!saved && !notified) {
@@ -348,6 +352,7 @@ async function relayByEmail(input: {
         Reference: input.saved && input.requestId ? `Request #${input.requestId} in the employee portal` : "Not saved in the portal",
       }),
       headers: { Accept: "application/json", "Content-Type": "application/json" },
+      keepalive: true,
       method: "POST",
     });
     const data = (await response.json().catch(() => ({}))) as { success?: string | boolean };
